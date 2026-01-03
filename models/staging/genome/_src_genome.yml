@@ -1,0 +1,41 @@
+sources:
+  - name: genome
+    database: raw  
+    schema: netflix  
+    config:
+      freshness: #(__freshness)
+        warn_after:
+          count: 12
+          period: hour
+        error_after:
+          count: 10
+          period: day
+      loaded_at_field: _etl_loaded_at # Will check last load time
+    tables:
+      - name: GENOME_SCORES
+        description: Raw orders data.
+        columns:
+          - name: MOVIE_ID
+            description: ID of the movie.
+            data_tests:
+            - not_null
+          - name: TAGID
+            description: TAG given to the movie, can be multiple TAGs per movie.
+            data_tests:
+            - not_null
+          - name: RELEVANCE
+            description: Relevance score of the TAG for the movie.
+            data_tests:
+            - not_null
+      - name: GENOME_TAGS
+        description: TAG ID and TAG description for each TAG.
+        columns:
+          - name: TAGID
+            description: Primary key.
+            data_tests:
+            - unique
+            - not_null
+          - name: TAG
+            description: Description of the TAG.
+            data_tests:
+            - not_null

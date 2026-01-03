@@ -1,0 +1,85 @@
+sources:
+  - name: ratings
+    database: raw  
+    schema: netflix  
+    config:
+      freshness: #(__freshness)
+        warn_after:
+          count: 12
+          period: hour
+        error_after:
+          count: 10
+          period: day
+      loaded_at_field: _etl_loaded_at # Will check last load time
+    tables:
+      - name: LINKS
+        description: Raw orders data.
+        columns:
+          - name: MOVIEID
+            description: ID of the movie.
+            data_tests:
+            - not_null
+            - unique
+          - name: IMDBID
+            description: IMDB link of the movie.
+            data_tests:
+            - not_null
+            - unique
+          - name: TMDBID
+            description: TMDB link of the movie.
+            data_tests:
+            - not_null
+            - unique
+      - name: MOVIES
+        description: TAG ID and TAG description for each TAG.
+        columns:
+          - name: MOIVIEID
+            description: Primary key. ID of the movie.
+            data_tests:
+            - unique
+            - not_null
+          - name: TITLE
+            description: Title of the movie.
+            data_tests:
+            - not_null
+          - name: GENRES
+            description: Genre of the movie. Multiple genres seperated by '|'.
+            data_tests:
+            - not_null
+      - name: RATINGS
+        description: Data of ratings given by reviewers to the movies.
+        columns:
+          - name: USERID
+            description: ID of the reviewer.
+            data_tests:
+            - not_null
+          - name: MOVIEID
+            description: ID of the movie.
+            data_tests:
+            - not_null
+          - name: RATING
+            description: Rating given by the reviewer to the movie.
+            data_tests:
+          - name: TIMESTAMP
+            description: Time of the rating given.
+            data_tests:
+            - not_null
+      - name: TAGS
+        description: Tags given by reviewers to the movies.
+        columns:
+          - name: USERID
+            description: ID of the reviewer.
+            data_tests:
+            - not_null
+          - name: MOVIEID
+            description: ID of the movie.
+            data_tests:
+            - not_null
+          - name: TAG
+            description: TAG given by the reviewer to the movie.
+            data_tests:
+            - not_null
+          - name: TIMESTAMP
+            description: Time of the TAG given.
+            data_tests:
+            - not_null
