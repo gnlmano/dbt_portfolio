@@ -1,0 +1,14 @@
+# dbt artifacts
+target/
+dbt_packages/
+logs/
+
+# python / env
+.venv/
+venv/
+.env
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
