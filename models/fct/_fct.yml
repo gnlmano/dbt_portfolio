@@ -1,0 +1,115 @@
+# Model tests test that the models produce the right output, they do not test the source data.
+models:
+  - name: fct_ratings
+    description: The grain of this table is movie-user review pair per row.
+    columns:
+      - name: movieid
+        description: ID of the movie being rated.
+        data_tests:
+          - not_null
+      - name: release_year
+        description: Year the movie was released, some movies may not have this information.
+      - name: title
+        description: Title of the movie.
+        data_tests:
+          - not_null
+      - name: genre_array
+        description: Array of genres for the movie.
+      - name: userid
+        description: ID of the user giving the rating.
+        data_tests:
+          - not_null
+      - name: rating
+        description: Rating given by the user.
+        data_tests:
+          - not_null
+      - name: rating_year
+        description: Year of the rating given by the user.
+        data_tests:
+          - not_null
+      - name: rating_month
+        description: Month of the rating given by the user.
+        data_tests:
+          - not_null
+      - name: rating_day
+        description: Day of the rating given by the user.
+        data_tests:
+          - not_null
+  - name: fct_movie_performance_daily
+    description: 1 row per (movie_id, date) combination, containing daily performance metrics for each movie.
+    columns:
+      - name: movieid
+        description: ID of the movie being rated.
+        data_tests:
+          - not_null
+      - name: release_year
+        description: Year the movie was released, some movies may not have this information.
+      - name: title
+        description: Title of the movie.
+        data_tests:
+          - not_null
+      - name: num_ratings
+        description: Number of ratings received by the movie on that day.
+        data_tests:
+          - not_null
+      - name: min_rating_given
+        description: Lowest rating received by the movie on that day.
+        data_tests:
+          - not_null
+      - name: max_rating_given
+        description: Highest rating received by the movie on that day.
+        data_tests:
+          - not_null
+      - name: avg_rating_given
+        description: Average rating received by the movie on that day.
+        data_tests:
+          - not_null
+      - name: last_rating_time
+        description: Latest time a rating was received for the movie.
+        data_tests:
+          - not_null
+      - name: received_ratings_last_7_days
+        description: Flag indicating if the movie received any ratings in the last 7 days.
+        data_tests:
+          - not_null
+  - name: fct_user_activity_daily
+    description: 1 row per (movie_id, date) combination, containing daily performance metrics for each movie.
+    columns:
+      - name: userid
+        description: ID of the user.
+        data_tests:
+          - not_null
+      - name: activity_date
+        description: Date of user activity.
+        data_tests:
+          - not_null
+      - name: daily_ratings_count
+        description: Number of ratings given by the user on that day.
+        data_tests:
+          - not_null
+      - name: num_movies_rated
+        description: Number of movies rated by the user on that day.
+        data_tests:
+          - not_null
+      - name: avg_rating_given
+        description: Average rating given by the user on that day.
+        data_tests:
+          - not_null
+      - name: last_activity_time
+        description: Latest time a rating was given by the user.
+        data_tests:
+          - not_null
+      - name: is_active_last_7_days
+        description: Flag indicating if the user was active in the last 7 days.
+        data_tests:
+          - not_null
+      - name: min_rating_given
+        description: Lowest rating received by the movie on that day.
+        data_tests:
+          - not_null
+      - name: max_rating_given
+        description: Highest rating received by the movie on that day.
+        data_tests:
+          - not_null
+        
+        

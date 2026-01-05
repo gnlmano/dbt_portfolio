@@ -1,0 +1,19 @@
+# Model tests test that the models produce the right output, they do not test the source data.
+models:
+  - name: stg_movies
+    description: The grain of this table is one unique movie per row.
+    columns:
+      - name: movieid
+        description: Primary key for movies table.
+        data_tests:
+          - not_null
+      - name: release_year
+        description: Year the movie was released, some movies may not have this information.
+      - name: title
+        description: Title of the movie.
+        data_tests:
+          - not_null
+      - name: genre_array
+        description: Array of genres for the movie.
+        
+          
