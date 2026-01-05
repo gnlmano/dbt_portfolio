@@ -59,7 +59,6 @@ sources:
             - not_null
           - name: RATING
             description: Rating given by the reviewer to the movie.
-            data_tests:
           - name: TIMESTAMP
             description: Time of the rating given.
             data_tests:
